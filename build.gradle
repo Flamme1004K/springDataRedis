@@ -25,7 +25,8 @@ dependencies {
     // lettuce
     compile('org.springframework.boot:spring-boot-starter-data-redis')
 
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'mysql:mysql-connector-java'
     // jedis
     compile group: 'redis.clients', name: 'jedis'
     compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.6.2'
