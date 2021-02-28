@@ -3,6 +3,9 @@ package com.practice.redis.controller;
 import com.practice.redis.config.CacheKey;
 import com.practice.redis.repo.User;
 import com.practice.redis.repo.UserJpaRepo;
+import com.practice.redis.repo.redisHash.RedisUser;
+import com.practice.redis.repo.redisHash.RedisUserRepository;
+import com.practice.redis.service.ConvertUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -17,6 +20,8 @@ import java.util.List;
 public class RedisController {
 
     private final UserJpaRepo userJpaRepo;
+    private final RedisUserRepository redisUserRepository;
+    private final ConvertUser convertUser;
 
     @Cacheable(value = CacheKey.USER, key = "#msrl", unless = "#result == null")
     @GetMapping("/user/{msrl}")
@@ -49,5 +54,17 @@ public class RedisController {
     public boolean deleteUser(@PathVariable long msrl) {
         userJpaRepo.deleteById(msrl);
         return true;
+    }
+
+    @GetMapping("/redisUser")
+    @ResponseBody
+    public void redisUser() {
+        convertUser.toRedis();
+    }
+
+    @GetMapping("/redisUser/all")
+    @ResponseBody
+    public Iterable<RedisUser> redisAllUser() {
+        return redisUserRepository.findAll();
     }
 }
