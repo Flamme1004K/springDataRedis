@@ -27,4 +27,9 @@ https://realmojo.tistory.com/172
     - @Table와 @RedisHash를 사용하여 구현.
     
     
+4. Redis + Spring
+
+https://smoothed9.medium.com/introduction-to-spring-data-redis-with-repository-4404355a3133
+
+
 ### 다음에 해야할 것은 대용량 데이터를 넣어서 RDB 조회 속도와 Redis 조회를 비교해야할 듯함.
